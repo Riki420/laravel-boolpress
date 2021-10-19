@@ -13,5 +13,8 @@
             <address>{{$post->created_at}}</address>
         </div>
     </div>
+    <div class="d-flex justify-content-end">
+        <a href="{{ route('admin.posts.index') }}" class="btn btn-primary mt-2">Back</a>
+    </div>
 </div>
 @endsection

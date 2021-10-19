@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('guest.home');
-});
+});*/
 
-Auth::routes(['register' => true]);
+Auth::routes();
+/*Auth::routes(['register' => false]);*/
 
 Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -27,3 +28,8 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->
         return abort(404);
     });
 });
+
+
+Route::get('{any?}', function () {
+    return view('guest.home');
+})->where('any', '.*');

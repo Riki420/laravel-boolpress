@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Validation\Rule;
+
 
 class PostController extends Controller
 {
@@ -38,6 +40,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|unique:posts|string|min:5',
+            'content' => 'required|string',
+        ]);
+
+
         $data = $request->all();
         $post = new Post();
         $post->fill($data);
@@ -76,6 +84,12 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'title' => ['required', Rule::unique('posts')->ignore($id), 'string', 'min:5'],
+            'content' => 'required|string',
+        ]);
+
         $data = $request->all();
         $post = Post::findOrFail($id);
         $post->fill($data);

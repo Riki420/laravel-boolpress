@@ -8,10 +8,11 @@
         {{session('alert-message')}}
     </div>
     @endif
+    <h1>My Post</h1>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Post Title</th>
                 <th scope="col">Created At</th>
                 <th class="d-flex justify-content-end">
@@ -22,7 +23,7 @@
         <tbody>
           @forelse($posts as $post)
               <tr>
-                <td>{{$loop->iteration}}</td>
+                <th>{{$post->id}}</th>
                 <td>{{$post->title}}</td>
                 <td>{{$post->created_at}}</td>
                 <td class="d-flex justify-content-end">
@@ -43,5 +44,8 @@
         </tbody>
         @endforelse
       </table>
+      <div class="d-flex align-item-center justify-content-end">
+        {{$posts->links()}}
+      </div>
 </div>
 @endsection

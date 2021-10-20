@@ -1,21 +1,19 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Boolpress</div>
-
-                    <div class="card-body">
-                        Work in Progress
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col">
+                <PostList />
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import PostList from "./Posts/PostList.vue";
 export default {
-    name: "App"
+    name: "App",
+    components: {
+        PostList
+    }
 };
 </script>

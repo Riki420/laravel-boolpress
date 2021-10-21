@@ -1959,8 +1959,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"]
@@ -37715,8 +37713,8 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("blockquote", { staticClass: "blockquote mb-0" }, [
-        _c("div", { staticClass: "card-footer" }, [
-          _c("time", [_c("p", [_vm._v(_vm._s(_vm.post.created_at))])])
+        _c("div", { staticClass: "card-footer d-flex justify-content-end" }, [
+          _c("time", [_vm._v(_vm._s(_vm.post.created_at))])
         ])
       ])
     ])

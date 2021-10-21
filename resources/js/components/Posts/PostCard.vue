@@ -11,10 +11,8 @@
             </p>
             <blockquote class="blockquote mb-0">
                 <!--Post Footer-->
-                <div class="card-footer">
-                    <time>
-                        <p>{{ post.created_at }}</p>
-                    </time>
+                <div class="card-footer d-flex justify-content-end">
+                    <time>{{ post.created_at }}</time>
                 </div>
             </blockquote>
         </div>

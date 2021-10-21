@@ -15,6 +15,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Post Title</th>
                 <th scope="col">Created At</th>
+                <th scope="col">Category</th>
                 <th class="d-flex justify-content-end">
                     <a href="{{ route('admin.posts.create') }}" class="btn btn-success">Add New Post</a>
                 </th>
@@ -23,9 +24,15 @@
         <tbody>
           @forelse($posts as $post)
               <tr>
-                <th>{{$post->id}}</th>
-                <td>{{$post->title}}</td>
-                <td>{{$post->created_at}}</td>
+                <th>{{ $post->id }}</th>
+                <td>{{ $post->title }}</td>
+                <td>{{ $post->created_at }}</td>
+                <td>
+                  @if($post->category)
+                  {{ $post->category->name }}
+                  @else -
+                  @endif
+                </td>
                 <td class="d-flex justify-content-end">
                   <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">View Post </a>
                   <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-warning ml-2">Edit Post </a>

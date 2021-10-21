@@ -5,6 +5,7 @@
     <div class="card">
         <div class="card-header">
             <h2>{{$post->title}}</h2>
+            <h6>Category: @if($post->category){{ $post->category->name }} @else None @endif</h6>
         </div>
         <div class="card-body">
             <p>{{$post->content}}</p>

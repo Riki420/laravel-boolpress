@@ -24,6 +24,15 @@
                     <input type="text" class="form-control" id="image" placeholder="URL IMAGE" name="image">
                     
                 </div>
+                <div class="form-group">
+                    <label for="category_id">Category</label>
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option>None</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-success">Create</a>
                 </form>
         </div>

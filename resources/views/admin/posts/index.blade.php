@@ -31,7 +31,7 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->created_at }}</td>
                 <td>
-                  <!--Se c'è l'autore del post mostro il nome, se no scrivo altro-->
+                  <!--Se c'è l'autore del post mostro il nome, se no scrivo No Author-->
                   @if($post->author) {{$post->author->name}} @else No Author @endif
                 </td>
                 <td>

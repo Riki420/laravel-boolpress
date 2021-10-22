@@ -1,38 +1,45 @@
 <template>
     <section id="postList" class="mt-4">
         <h2>Post</h2>
-        <Pagination
-            :lastPage="pagination.lastPage"
-            :currentPage="pagination.currentPage"
-            @onPageChange="changePage"
-        />
-        <PostCard v-for="post in posts" :key="post.id" :post="post" />
-        <Pagination
-            :lastPage="pagination.lastPage"
-            :currentPage="pagination.currentPage"
-            @onPageChange="changePage"
-        />
+        <Loader v-if="isLoading" />
+        <div>
+            <Pagination
+                :lastPage="pagination.lastPage"
+                :currentPage="pagination.currentPage"
+                @onPageChange="changePage"
+            />
+            <PostCard v-for="post in posts" :key="post.id" :post="post" />
+            <Pagination
+                :lastPage="pagination.lastPage"
+                :currentPage="pagination.currentPage"
+                @onPageChange="changePage"
+            />
+        </div>
     </section>
 </template>
 
 <script>
 import PostCard from "./PostCard.vue";
 import Pagination from "./Pagination.vue";
+import Loader from "../Loader.vue";
 export default {
     name: "PostPage",
     components: {
         PostCard,
-        Pagination
+        Pagination,
+        Loader
     },
     data() {
         return {
             posts: [],
-            pagination: []
+            pagination: [],
+            isLoading: false
         };
     },
     methods: {
         //getPost
         getPosts(page) {
+            this.isLoading = true;
             axios
                 .get(`http://localhost:8000/api/posts?page=${page}`)
                 .then(res => {
@@ -46,6 +53,9 @@ export default {
                 })
                 .catch(err => {
                     console.error(err);
+                })
+                .then(() => {
+                    this.isLoading = false;
                 });
         },
         changePage(page) {

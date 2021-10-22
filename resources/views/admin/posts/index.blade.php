@@ -16,6 +16,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Post Title</th>
                 <th scope="col">Created At</th>
+                <th scope="col">Author</th>
                 <th scope="col">Category</th>
                 <th class="d-flex justify-content-end">
                     <a href="{{ route('admin.posts.create') }}" class="btn btn-success">Add New Post</a>
@@ -30,6 +31,11 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->created_at }}</td>
                 <td>
+                  <!--Se c'è l'autore del post mostro il nome, se no scrivo altro-->
+                  @if($post->author) {{$post->author->name}} @else No Author @endif
+                </td>
+                <td>
+                  <!--Se c'è la categoria di un post mostro il nome, altrimenti scrivo altro-->
                   @if($post->category)
                   {{ $post->category->name }}
                   @else -

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Validation\Rule;
@@ -51,6 +52,7 @@ class PostController extends Controller
         $data = $request->all();
         $post = new Post();
         $post->fill($data);
+        $post->user_id = Auth::id();
         $post->save();
         return redirect()->route('admin.posts.index')->with('alert', 'success')->with('alert-message', 'Created Succesfully');
     }
@@ -96,6 +98,7 @@ class PostController extends Controller
         $data = $request->all();
         $post = Post::findOrFail($id);
         $post->fill($data);
+        $post->user_id = Auth::id();
         $post->save();
         return redirect()->route('admin.posts.show', $id)->with('alert', 'warning')->with('alert-message', 'Edited Successfully');
     }

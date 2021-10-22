@@ -83,6 +83,8 @@ class usrInfoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.author.index');
     }
 }

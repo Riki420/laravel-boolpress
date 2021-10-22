@@ -24,6 +24,13 @@
                         <td>
                             {{ $user->usrInfo ? $user->usrInfo->address : 'No Address' }}
                         </td>
+                        <td class="d-flex justify-content-end">
+                            <form action="{{ route('admin.author.destroy', $user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger ml-2">Delete User </button>
+                            </form>
+                        </td>
                     </tr>
                     @empty
                         <tr>

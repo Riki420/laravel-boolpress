@@ -1,37 +1,28 @@
 <template>
     <section id="postList" class="mt-4">
         <h2>Post</h2>
+        <Pagination
+            :lastPage="pagination.lastPage"
+            :currentPage="pagination.currentPage"
+            @onPageChange="changePage"
+        />
         <PostCard v-for="post in posts" :key="post.id" :post="post" />
-        <nav
-            aria-label="Page navigation example"
-            class="mt-4 d-flex justify-content-end"
-        >
-            <ul class="pagination">
-                <li
-                    class="page-item"
-                    v-if="pagination.currentPage > 1"
-                    @click="getPosts(pagination.currentPage - 1)"
-                >
-                    <a class="page-link" href="#">Previous</a>
-                </li>
-                <li
-                    class="page-item"
-                    v-if="pagination.lastPage > pagination.currentPage"
-                    @click="getPosts(pagination.currentPage + 1)"
-                >
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <Pagination
+            :lastPage="pagination.lastPage"
+            :currentPage="pagination.currentPage"
+            @onPageChange="changePage"
+        />
     </section>
 </template>
 
 <script>
 import PostCard from "./PostCard.vue";
+import Pagination from "./Pagination.vue";
 export default {
     name: "PostPage",
     components: {
-        PostCard
+        PostCard,
+        Pagination
     },
     data() {
         return {
@@ -56,6 +47,9 @@ export default {
                 .catch(err => {
                     console.error(err);
                 });
+        },
+        changePage(page) {
+            this.getPosts(page);
         }
     },
     created() {
@@ -63,12 +57,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-.page-item {
-    cursor: pointer;
-    .page-link {
-        color: #000;
-    }
-}
-</style>

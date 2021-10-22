@@ -12,7 +12,9 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $category_name = ['HTML', 'CSS', 'JS', 'VueJS', 'PHP', 'Laravel'];
+        $category_name = [
+            'HTML', 'CSS', 'JS', 'VueJS', 'PHP', 'Laravel'
+        ];
 
         foreach ($category_name as $name) {
             $category = new Category();

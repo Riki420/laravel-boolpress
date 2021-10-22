@@ -1959,6 +1959,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"]
@@ -1983,6 +1987,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostPage",
@@ -1991,7 +2008,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      pagination: []
     };
   },
   methods: {
@@ -2000,7 +2018,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("http://localhost:8000/api/posts").then(function (res) {
-        _this.posts = res.data.posts;
+        //recupero le proprietà data [Destructuring]
+        var _res$data = res.data,
+            data = _res$data.data,
+            current_page = _res$data.current_page,
+            last_page = _res$data.last_page;
+        _this.posts = data;
+        _this.pagination = {
+          currentPage: current_page,
+          lastPage: last_page
+        };
       })["catch"](function (err) {
         console.error(err);
       });
@@ -37713,9 +37740,25 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("blockquote", { staticClass: "blockquote mb-0" }, [
-        _c("div", { staticClass: "card-footer d-flex justify-content-end" }, [
-          _c("time", [_vm._v(_vm._s(_vm.post.created_at))])
-        ])
+        _c(
+          "div",
+          { staticClass: "card-footer d-flex justify-content-between" },
+          [
+            _vm.post.category_id
+              ? _c("p", { staticClass: "me-4" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.post.category.name) +
+                      "\n                "
+                  )
+                ])
+              : _c("p", { staticClass: "me-4" }, [_vm._v("No Category")]),
+            _vm._v(" "),
+            _c("time", { staticClass: "font-weight-light" }, [
+              _vm._v(_vm._s(_vm.post.created_at))
+            ])
+          ]
+        )
       ])
     ])
   ])
@@ -37750,7 +37793,34 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.posts, function(post) {
         return _c("PostCard", { key: post.id, attrs: { post: post } })
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "nav",
+        {
+          staticClass: "mt-4",
+          attrs: { "aria-label": "Page navigation example" }
+        },
+        [
+          _c("ul", { staticClass: "pagination" }, [
+            _vm.pagination.current_page > 1
+              ? _c("li", { staticClass: "page-item" }, [
+                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+                    _vm._v("Previous")
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pagination.current_page === _vm.pagination.last_page
+              ? _c("li", { staticClass: "page-item" }, [
+                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+                    _vm._v("Next")
+                  ])
+                ])
+              : _vm._e()
+          ])
+        ]
+      )
     ],
     2
   )

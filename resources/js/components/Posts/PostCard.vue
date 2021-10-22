@@ -2,17 +2,24 @@
     <div class="card mt-4">
         <!--Post Title-->
         <div class="card-header">
-            {{ post.title }}
+            <h1 class="roboto-text">{{ post.title }}</h1>
         </div>
         <!--Post Body-->
         <div class="card-body">
-            <p>
-                {{ post.content }}
-            </p>
+            <div class="d-flex">
+                <p class="monserrat-text flex-grow-1">
+                    {{ post.content }}
+                </p>
+            </div>
             <blockquote class="blockquote mb-0">
                 <!--Post Footer-->
                 <div class="card-footer d-flex justify-content-between">
-                    <time class="font-weight-light">{{ post.created_at }}</time>
+                    <small>
+                        {{ post.category ? post.category.name : "nessuna" }}
+                    </small>
+                    <small class="font-weight-light">{{
+                        getDate(post.created_at)
+                    }}</small>
                 </div>
             </blockquote>
         </div>
@@ -22,7 +29,23 @@
 <script>
 export default {
     name: "PostCard",
-    props: ["post"]
+    props: ["post"],
+    methods: {
+        //recupero la data nel formato
+        getDate(date) {
+            let postDate = new Date(date);
+            let day = postDate.getDate();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            let month = postDate.getMonth();
+            if (month < 10) {
+                month = "0" + month;
+            }
+            const year = postDate.getFullYear();
+            return `${month}-${day}-${year}`;
+        }
+    }
 };
 </script>
 

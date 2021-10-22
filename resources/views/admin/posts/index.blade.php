@@ -10,6 +10,7 @@
     @endif
     <h1>My Post</h1>
     <table class="table">
+      <!--Table Header-->
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -21,6 +22,7 @@
                 </th>
             </tr>
         </thead>
+        <!--Table Body-->
         <tbody>
           @forelse($posts as $post)
               <tr>
@@ -33,6 +35,7 @@
                   @else -
                   @endif
                 </td>
+                <!--Button-->
                 <td class="d-flex justify-content-end">
                   <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">View Post </a>
                   <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-warning ml-2">Edit Post </a>
@@ -51,6 +54,7 @@
         </tbody>
         @endforelse
       </table>
+      <!--Paginate-->
       <div class="d-flex align-item-center justify-content-end">
         {{$posts->links()}}
       </div>

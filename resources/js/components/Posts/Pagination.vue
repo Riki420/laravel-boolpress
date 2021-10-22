@@ -4,6 +4,7 @@
         class="mt-4 d-flex justify-content-end"
     >
         <ul class="pagination">
+            <!--Previous-->
             <li
                 class="page-item"
                 v-if="currentPage > 1"
@@ -11,6 +12,7 @@
             >
                 <a class="page-link" href="#">Previous</a>
             </li>
+            <!--Current-->
             <li
                 class="page-item"
                 :class="n === currentPage ? 'active' : ''"
@@ -20,6 +22,7 @@
             >
                 <a href="#" class="page-link">{{ n }}</a>
             </li>
+            <!--Next-->
             <li
                 class="page-item"
                 v-if="lastPage > currentPage"

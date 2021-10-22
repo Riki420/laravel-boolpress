@@ -1,19 +1,24 @@
 <template>
     <section id="postList" class="mt-4">
-        <h2>Post</h2>
+        <h1 class="roboto-text">Post</h1>
         <Loader v-if="isLoading" />
         <div>
+            <hr />
+
             <Pagination
                 :lastPage="pagination.lastPage"
                 :currentPage="pagination.currentPage"
                 @onPageChange="changePage"
             />
+
             <PostCard v-for="post in posts" :key="post.id" :post="post" />
+
             <Pagination
                 :lastPage="pagination.lastPage"
                 :currentPage="pagination.currentPage"
                 @onPageChange="changePage"
             />
+            <hr />
         </div>
     </section>
 </template>

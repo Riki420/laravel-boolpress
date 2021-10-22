@@ -1994,6 +1994,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pagination",
   props: ["lastPage", "currentPage"]
@@ -2031,9 +2034,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
-  props: ["post"]
+  props: ["post"],
+  methods: {
+    //recupero la data nel formato
+    getDate: function getDate(date) {
+      var postDate = new Date(date);
+      var day = postDate.getDate();
+
+      if (day < 10) {
+        day = "0" + day;
+      }
+
+      var month = postDate.getMonth();
+
+      if (month < 10) {
+        month = "0" + month;
+      }
+
+      var year = postDate.getFullYear();
+      return "".concat(month, "-").concat(day, "-").concat(year);
+    }
+  }
 });
 
 /***/ }),
@@ -2050,6 +2080,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PostCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostCard.vue */ "./resources/js/components/Posts/PostCard.vue");
 /* harmony import */ var _Pagination_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pagination.vue */ "./resources/js/components/Posts/Pagination.vue");
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38640,12 +38675,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card mt-4" }, [
     _c("div", { staticClass: "card-header" }, [
-      _vm._v("\n        " + _vm._s(_vm.post.title) + "\n    ")
+      _c("h1", { staticClass: "roboto-text" }, [_vm._v(_vm._s(_vm.post.title))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("p", [
-        _vm._v("\n            " + _vm._s(_vm.post.content) + "\n        ")
+      _c("div", { staticClass: "d-flex" }, [
+        _c("p", { staticClass: "monserrat-text flex-grow-1" }, [
+          _vm._v(
+            "\n                " + _vm._s(_vm.post.content) + "\n            "
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("blockquote", { staticClass: "blockquote mb-0" }, [
@@ -38653,8 +38692,18 @@ var render = function() {
           "div",
           { staticClass: "card-footer d-flex justify-content-between" },
           [
-            _c("time", { staticClass: "font-weight-light" }, [
-              _vm._v(_vm._s(_vm.post.created_at))
+            _c("small", [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(
+                    _vm.post.category ? _vm.post.category.name : "nessuna"
+                  ) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "font-weight-light" }, [
+              _vm._v(_vm._s(_vm.getDate(_vm.post.created_at)))
             ])
           ]
         )
@@ -38688,13 +38737,15 @@ var render = function() {
     "section",
     { staticClass: "mt-4", attrs: { id: "postList" } },
     [
-      _c("h2", [_vm._v("Post")]),
+      _c("h1", { staticClass: "roboto-text" }, [_vm._v("Post")]),
       _vm._v(" "),
       _vm.isLoading ? _c("Loader") : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
         [
+          _c("hr"),
+          _vm._v(" "),
           _c("Pagination", {
             attrs: {
               lastPage: _vm.pagination.lastPage,
@@ -38713,7 +38764,9 @@ var render = function() {
               currentPage: _vm.pagination.currentPage
             },
             on: { onPageChange: _vm.changePage }
-          })
+          }),
+          _vm._v(" "),
+          _c("hr")
         ],
         2
       )

@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\usrInfo;
+use App\User;
 
 class usrInfoController extends Controller
 {
@@ -13,7 +16,8 @@ class usrInfoController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('admin.posts.author.index', compact('users'));
     }
 
     /**
@@ -23,7 +27,6 @@ class usrInfoController extends Controller
      */
     public function create()
     {
-        return view('/author');
     }
 
     /**
@@ -45,7 +48,8 @@ class usrInfoController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.posts.author.show', compact('user'));
     }
 
     /**

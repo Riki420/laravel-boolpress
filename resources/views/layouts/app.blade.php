@@ -68,6 +68,9 @@
                                     <a class="dropdown-item" href="{{ route('admin.posts.index') }}">
                                         My Posts
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('admin.author.index') }}">
+                                        User Control
+                                    </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>

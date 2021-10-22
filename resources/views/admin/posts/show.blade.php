@@ -21,8 +21,10 @@
             </figure>
         </div>
         <!--Post Footer-->
-        <div class="card-footer d-flex justify-content-end">
-            <address>{{$post->created_at}}</address>
+        <div class="card-footer d-flex justify-content-between">
+            <address><!--Se c'è l'autore del post mostro il nome, se no scrivo No Author-->
+                  @if($post->author) <a href="{{ route('admin.author.index') }}">{{$post->author->name}}</a> @else No Author @endif</address>
+            <small>{{$post->created_at}}</small>
         </div>
     </div>
     <!--Button-->

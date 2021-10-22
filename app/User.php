@@ -43,8 +43,8 @@ class User extends Authenticatable
     }
 
     //collego la userInfo
-    public function userInfo()
+    public function usrInfo()
     {
-        return $this->hasOne('App\usrInfo');
+        return $this->hasOne('App\Models\usrInfo');
     }
 }

@@ -40,6 +40,16 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                      @enderror 
                 </div>
+                <!--Tag Post-->
+                <fieldset class="mb-4">
+                    <h5>Tags</h5>
+                    @foreach($tags as $tag)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="tag-{{$tag->id}}" value="{{$tag->id}}" name="tags[]">
+                            <label class="form-check-label" for="tag-{{$tag->id}}">{{$tag->name}}</label>
+                        </div>
+                    @endforeach
+                </fieldset>
                 <!--Submit-->
                 <button type="submit" class="btn btn-success">Create</a>
                 <button type="reset" class="btn btn-secondary ml-2">Reset</button>

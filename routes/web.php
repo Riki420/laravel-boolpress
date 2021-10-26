@@ -25,6 +25,7 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('posts', 'PostController');
     Route::resource('author', 'usrInfoController');
+    Route::resource('category', 'CategoryController');
     Route::get('/{any?}', function () {
         return abort(404);
     });

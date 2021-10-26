@@ -18,6 +18,7 @@
                 <th scope="col">Created At</th>
                 <th scope="col">Author</th>
                 <th scope="col">Category</th>
+                <th scope="col">Tags</th>
                 <th class="d-flex justify-content-end">
                     <a href="{{ route('admin.posts.create') }}" class="btn btn-success">Add New Post</a>
                 </th>
@@ -36,7 +37,14 @@
                 </td>
                 <td>
                   <!--Se c'è la categoria di un post mostro il nome, altrimenti scrivo altro-->
-                  @if($post->category) <span class="badge p-2 rounded-pill bg-{{$post->category->color}}">{{$post->category->name}}</span> @else - @endif
+                  @if($post->category) <span class="badge p-2 rounded-pill text-white" style="background-color: {{$post->category->color}}">{{$post->category->name}}</span> @else - @endif
+                </td>
+                
+                <td>
+                  @forelse($post->tags as $tag)
+                  <span class="badge p-1 rounded-pill text-white" style="background-color: {{$tag->color}};">{{$tag->name}}</span>
+                  @empty -
+                  @endforelse
                 </td>
                 <!--Button-->
                 <td class="d-flex justify-content-end">

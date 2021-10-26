@@ -42,6 +42,8 @@ class CategoryController extends Controller
         $category = new Category();
         $category->fill($data);
         $category->save();
+
+
         return redirect()->route('admin.posts.category.index')->with('alert', 'success')->with('alert-message', 'Elemento salvato con successo');
     }
 
@@ -78,7 +80,7 @@ class CategoryController extends Controller
     {
         $data = $request->all();
         $category->update($data);
-        return redirect()->route('admin.category.index')->with('alert', 'info')->with('alert-message', 'Elemento modificato con successo');
+        return redirect()->route('admin.category.index')->with('alert', 'warning')->with('alert-message', 'Edit Successfully');
     }
 
     /**
@@ -90,6 +92,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
-        return redirect()->route('admin.category.index')->with('alert', 'danger')->with('alert-message', 'Elemento eliminato con successo');
+        return redirect()->route('admin.category.index')->with('alert', 'danger')->with('alert-message', 'Delete Successfully');
     }
 }

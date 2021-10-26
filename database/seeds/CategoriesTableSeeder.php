@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Faker\Generator as Faker;
 
 
 class CategoriesTableSeeder extends Seeder
@@ -11,38 +12,18 @@ class CategoriesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $categories = [
-            [
-                'name' => 'HTML',
-                'color' => 'secondary'
-            ],
-            [
-                'name' => 'CSS',
-                'color' => 'primary'
-            ],
-            [
-                'name' => 'Vue Js',
-                'color' => 'success'
-            ],
-            [
-                'name' => 'JS',
-                'color' => 'warning'
-            ],
-            [
-                'name' => 'Laravel',
-                'color' => 'danger'
-            ],
-            [
-                'name' => 'PHP',
-                'color' => 'info'
-            ],
+        $categories_name = [
+
+            'HTML', 'JS', 'CSS', 'Laravel', 'VueJs', 'PHP'
+
         ];
-        foreach ($categories as $category) {
-            $categ = new Category();
-            $categ->fill($category);
-            $categ->save();
+        foreach ($categories_name as $category_name) {
+            $new_categ = new Category();
+            $new_categ->name = $category_name;
+            $new_categ->color = $faker->hexColor();
+            $new_categ->save();
         }
     }
 }

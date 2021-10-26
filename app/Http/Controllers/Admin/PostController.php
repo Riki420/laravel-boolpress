@@ -57,6 +57,9 @@ class PostController extends Controller
         $post->fill($data);
         $post->user_id = Auth::id();
         $post->save();
+
+        if (array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
+
         return redirect()->route('admin.posts.index')->with('alert', 'success')->with('alert-message', 'Created Succesfully');
     }
 
@@ -68,7 +71,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('admin.posts.show', compact('post'));
+        $categories = Category::all();
+
+        return view('admin.posts.show', compact('post', 'categories'));
     }
 
     /**
@@ -81,8 +86,8 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-
-        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
+        $tagIds = $post->tags->pluck('id')->toArray();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'tagIds'));
     }
 
     /**
@@ -104,8 +109,12 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->fill($data);
         $post->user_id = Auth::id();
-        $post->save();
-        return redirect()->route('admin.posts.show', $id)->with('alert', 'warning')->with('alert-message', 'Edited Successfully');
+
+        if (!array_key_exists('tags', $data)) $post->tags()->detach();
+        else $post->tags()->sync($data['tags']);
+
+        $post->update($data);
+        return redirect()->route('admin.posts.index')->with('alert', 'warning')->with('alert-message', 'Edit Successfully');
     }
 
     /**

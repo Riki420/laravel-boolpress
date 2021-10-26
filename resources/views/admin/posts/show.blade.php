@@ -11,7 +11,9 @@
         <!--Post Header-->
         <div class="card-header">
             <h2 class="roboto-text">{{$post->title}}</h2>
-            <h6>Category: @if($post->category){{ $post->category->name }} @else None @endif</h6>
+            <div>
+                @if($post->category) <span class="badge p-2 rounded-pill bg-{{$post->category->color}}">{{$post->category->name}}</span> @else - @endif
+            </div>
         </div>
         <!--Post Body-->
         <div class="card-body d-flex">

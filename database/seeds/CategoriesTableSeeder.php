@@ -1,7 +1,8 @@
 <?php
 
-use App\Models\Category;
 use Illuminate\Database\Seeder;
+use App\Models\Category;
+
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -13,14 +14,35 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            'HTML', 'CSS', 'JS', 'VueJS', 'PHP', 'Laravel'
+            [
+                'name' => 'HTML',
+                'color' => 'secondary'
+            ],
+            [
+                'name' => 'CSS',
+                'color' => 'primary'
+            ],
+            [
+                'name' => 'Vue Js',
+                'color' => 'success'
+            ],
+            [
+                'name' => 'JS',
+                'color' => 'warning'
+            ],
+            [
+                'name' => 'Laravel',
+                'color' => 'danger'
+            ],
+            [
+                'name' => 'PHP',
+                'color' => 'info'
+            ],
         ];
-
         foreach ($categories as $category) {
-            $category = new Category();
-            $category->fill = ($category);
-
-            $category->save();
+            $categ = new Category();
+            $categ->fill($category);
+            $categ->save();
         }
     }
 }

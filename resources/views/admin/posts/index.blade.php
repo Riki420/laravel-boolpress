@@ -32,14 +32,11 @@
                 <td>{{ $post->created_at }}</td>
                 <td>
                   <!--Se c'è l'autore del post mostro il nome, se no scrivo No Author-->
-                  @if($post->author) {{$post->author->name}} @else No Author @endif
+                  @if($post->author) {{$post->author->name}} @else - @endif
                 </td>
                 <td>
                   <!--Se c'è la categoria di un post mostro il nome, altrimenti scrivo altro-->
-                  @if($post->category)
-                  {{ $post->category->name }}
-                  @else -
-                  @endif
+                  @if($post->category) <span class="badge p-2 rounded-pill bg-{{$post->category->color}}">{{$post->category->name}}</span> @else - @endif
                 </td>
                 <!--Button-->
                 <td class="d-flex justify-content-end">
